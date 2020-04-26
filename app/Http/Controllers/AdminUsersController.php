@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersCreateRequest;
 use Illuminate\Http\Request;
+use App\User;
+use App\Role;
 
 class AdminUsersController extends Controller
 {
@@ -13,7 +16,9 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+        $users = User::all();
+
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -23,6 +28,10 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
+        //$roles = Role::pluck('name', 'id');
+
+        //dd($roles);
+
         return view('admin.users.create');
     }
 
@@ -32,8 +41,11 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersCreateRequest $request)
     {
+        User::create($request->all());
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -55,7 +67,9 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.edit');
+        $user = User::findOrFail($id);
+
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -65,9 +79,15 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersCreateRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $input = $request->all();
+
+        $user->update($input);
+
+        return redirect('/admin/users');
     }
 
     /**
