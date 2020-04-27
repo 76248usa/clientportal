@@ -5,6 +5,8 @@
 
 <h1>Users</h1>
 
+<h4 class='bg-danger'>{{session('status')}}</h4>
+
 <table class="table">
     <thead>
         <tr>

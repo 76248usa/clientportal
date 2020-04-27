@@ -20,7 +20,6 @@ class User extends Authenticatable
         'email',
         'business',
         'number',
-
         'role_id',
         'is_active',
     ];
