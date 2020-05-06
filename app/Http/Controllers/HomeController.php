@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        //return response()->download(public_path('l2c_1588284072.pdf'));
         return view('home');
     }
 }

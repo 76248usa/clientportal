@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostsCreateRequest;
 use Illuminate\Http\Request;
+use Storage;
+use Response;
+use App\Post;
+use App\Photo;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Download;
+use Barryvdh\DomPDF\PDF;
+
 
 class AdminPostsController extends Controller
 {
@@ -13,7 +23,10 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index');
+
+        $posts = Post::all();
+
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -32,17 +45,58 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsCreateRequest $request)
     {
-        //
+
+        $this->validate($request, [
+            'photo_name' => 'nullable|max:1999'
+        ]);
+
+
+        //Handle File Upload
+        if ($request->hasFile('photo_name')) {
+            //get filename with the extension
+            $filenameWithExt = $request->file('photo_name')->getClientOriginalName();
+            //get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //get just extention
+            $extention = $request->file('photo_name')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extention;
+            //Upload File
+            $path = $request->file('photo_name')->storeAs('public/photo_name', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'nofile.jpg';
+
+            dd($path);
+
+
+
+            //Create Post
+            $post = new Post;
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+            $post->user_id = auth()->user()->id;
+            $post->photo_name = $fileNameToStore;
+
+            $post->save();
+
+
+
+            //dd($post);
+
+            return redirect('/admin/posts');
+
+
+            /**
+             * Display the specified resource.
+             *
+             * @param  int  $id
+             * @return \Illuminate\Http\Response
+             */
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
@@ -80,5 +134,17 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downfunc($id)
+    {
+        $post = Post::findOrFail($id);
+
+        //return $post->photo_name;
+        //return response()->download(public_path('l2c_1588284072.pdf'));
+
+        return response()->download(public_path('/storage/photo_name'));
+
+        //return response()->download(public_path('storage/photo_name/$post->photo_name'));
     }
 }

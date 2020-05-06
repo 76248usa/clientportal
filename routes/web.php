@@ -1,7 +1,13 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Http\Controllers\AdminUsersController;
+use Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +38,21 @@ Route::get('/admin', function () {
 Route::resource('admin/users', 'AdminUsersController');
 
 Route::resource('admin/posts', 'AdminPostsController');
+
+Route::get('/download/{id}', 'AdminPostsController@downfunc');
+
+Route::get('/admin/invoice', function () {
+    return view('admin.invoice');
+});
+
+Route::get('/admin/pdf', 'CustomerController@fun_pdf');
+
+Route::get('/files/create', 'DocumentController@create');
+
+Route::post('/files', 'DocumentController@store');
+
+Route::get('/files', 'DocumentController@index');
+
+Route::get('/files/{id}', 'DocumentController@show');
+
+Route::get('/file/download/{file}', 'DocumentController@download');

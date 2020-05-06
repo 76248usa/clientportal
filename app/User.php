@@ -20,9 +20,16 @@ class User extends Authenticatable
         'email',
         'business',
         'number',
-        'role_id',
         'is_active',
     ];
+
+    public function post()
+    {
+
+        return $this->belongsTo('App\Post');
+    }
+
+
 
     /**
      * The attributes that should be hidden for arrays.
