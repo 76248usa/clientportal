@@ -14,7 +14,8 @@ class AddImageToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('photo_name');
+            $table->string('photo_name')->nullable();
+            $table->string('file')->nullable();
         });
     }
 

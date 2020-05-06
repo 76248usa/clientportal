@@ -23,10 +23,8 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-
-        $posts = Post::all();
-
-        return view('admin.posts.index', compact('posts'));
+        $file = Post::all();
+        return view('admin.document.view', compact('file'));
     }
 
     /**
@@ -47,8 +45,24 @@ class AdminPostsController extends Controller
      */
     public function store(PostsCreateRequest $request)
     {
+        $data = new Post;
+        if ($request->file('file')) {
+            $file = $request->file;
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $request->file->move('storage/', $filename);
+            $data->file = $filename;
+        }
+        $data->title = $request->title;
+        $data->body = $request->body;
+        $data->photo_name = $request->photo_name;
+        $data->user_id = auth()->user()->id;
+        $data->save();
 
-        $this->validate($request, [
+        return redirect('admin/posts');
+
+
+
+        /*$this->validate($request, [
             'photo_name' => 'nullable|max:1999'
         ]);
 
@@ -68,10 +82,6 @@ class AdminPostsController extends Controller
         } else {
             $fileNameToStore = 'nofile.jpg';
 
-            dd($path);
-
-
-
             //Create Post
             $post = new Post;
             $post->title = $request->input('title');
@@ -79,27 +89,23 @@ class AdminPostsController extends Controller
             $post->user_id = auth()->user()->id;
             $post->photo_name = $fileNameToStore;
 
-            $post->save();
+            $post->save();}
+
+            return redirect('/admin/posts');*/
 
 
-
-            //dd($post);
-
-            return redirect('/admin/posts');
-
-
-            /**
-             * Display the specified resource.
-             *
-             * @param  int  $id
-             * @return \Illuminate\Http\Response
-             */
-        }
+        /**
+         * Display the specified resource.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
     }
 
     public function show($id)
     {
-        //
+        $data = Post::findOrFail($id);
+        return view('admin.posts.details', compact('data'));
     }
 
     /**

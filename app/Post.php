@@ -12,6 +12,7 @@ class Post extends Model
         'user_id',
         'photo_name',
         'download',
+        'file'
 
 
 

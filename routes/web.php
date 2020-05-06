@@ -53,6 +53,9 @@ Route::post('/files', 'DocumentController@store');
 
 Route::get('/files', 'DocumentController@index');
 
-Route::get('/files/{id}', 'DocumentController@show');
+//Route::get('/files/{id}', 'DocumentController@show');
+
+Route::get('/files/{id}', 'AdminPostsController@show');
+
 
 Route::get('/file/download/{file}', 'DocumentController@download');

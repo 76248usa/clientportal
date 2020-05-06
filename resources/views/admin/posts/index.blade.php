@@ -1,40 +1,29 @@
-@extends('layouts.admin')
+@extends('app.blade')
 
 @section('content')
-
-<h1>Posts</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Post Title</th>
-            <th>Body</th>
-            <th>Image</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @if($posts)
-        @foreach($posts as $post)
+​
+<title>Create Document</title>
 
 
-        <tr>
-            <td>{{$post->id}}</td>
-            <td>{{$post->title}}</a></td>
-            <td>{{$post->body}}</td>
-            <td>{{$post->photo_name}}</td>
-            <td><a href="/download" class="btn btn-large pull-right"><i class="icon-download-alt"> </i> Download Brochure </a></td>
-            <td><img style=width:20% src="/storage/photo_name/{{$post->photo_name}}"></td>
+<table border="1">
+    <tr>
+        <th>s1</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>View</th>
+        <th>Download</th>
+    </tr>
 
+    @foreach($file as $key=>$data)
+    <tr>
+        <td>{{++$key}}</td>
+        <td>{{$data->title}}</td>
+        <td>{{$data->description}}</td>
+        <td><a href="/files/{{$data->id}}">View</a></td>
+        <td><a href="/file/download/{{$data->file}}">Download</a></td>
+    </tr>
 
+    @endforeach
+</table>
 
-        </tr>
-
-
-
-
-        @endforeach
-        @endif
-
-        @endsection
+@endsection
