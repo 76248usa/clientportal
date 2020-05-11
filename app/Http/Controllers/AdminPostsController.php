@@ -8,6 +8,7 @@ use Storage;
 use Response;
 use App\Post;
 use App\Photo;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Download;
@@ -116,7 +117,9 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+        $data = Post::findOrFail($id);
+
+        return view('admin.posts.edit', compact('data'));
     }
 
     /**
@@ -128,7 +131,29 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        /*if ($request->file('file')) {
+            $file = $request->file;
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $request->file->move('storage/', $filename);
+            $data->file = $filename;
+        }*/
+
+        if ($request->file('file')) {
+            $file = $request->file;
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $request->file->move('storage/', $filename);
+            $newfile = Post::create(['file' => $filename]);
+            $data['file'] = $newfile->id;
+        }
+
+        $user = Auth::user();
+        //dd($user);
+
+        //Auth::user()->posts()->whereId($id)->first()->update($data);
+
+        //return redirect('admin/posts');
     }
 
     /**
@@ -142,15 +167,14 @@ class AdminPostsController extends Controller
         //
     }
 
+
+
     public function downfunc($id)
     {
         $post = Post::findOrFail($id);
 
-        //return $post->photo_name;
-        //return response()->download(public_path('l2c_1588284072.pdf'));
+
 
         return response()->download(public_path('/storage/photo_name'));
-
-        //return response()->download(public_path('storage/photo_name/$post->photo_name'));
     }
 }

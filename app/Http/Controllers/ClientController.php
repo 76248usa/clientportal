@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use League\CommonMark\Block\Element\Document;
+use App\Client;
 use App\Documents;
-use Response;
 
-class DocumentController extends Controller
+
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $file = Documents::all();
-        return view('admin.document.view', compact('file'));
+        $clients = Client::all();
+
+        return view('admin.clients.index', compact('clients'));
     }
 
     /**
@@ -27,9 +28,10 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('admin.document.create');
 
-        //return view('admin.posts.create');
+        $documents = Documents::pluck('title', 'id')->all();
+
+        return view('admin.clients.create', compact('documents'));
     }
 
     /**
@@ -40,20 +42,17 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Documents();
+        Client::create($request->all());
 
-        if ($request->file('file')) {
-            $file = $request->file;
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $request->file->move('storage/', $filename);
-            $data->file = $filename;
-        }
-        $data->title = $request->title;
-        $data->description = $request->description;
-        $data->client_id = $request->client_id;
-        $data->save();
-        dd($data);
-        //return redirect()->back();
+        //$data = new Client();
+        //$data->name = $request->name;
+        //$data->title = $request->title;
+        //$data->description = $request->description;
+        //$data->document_id = $request->document_id;
+        //$data->save();
+
+
+        return redirect('/admin/clients');
     }
 
     /**
@@ -64,13 +63,11 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        $data = Documents::findOrFail($id);
-        return view('admin.document.details', compact('data'));
-    }
+        $client = Client::findOrFail($id);
 
-    public function download($file)
-    {
-        return response()->download('storage/' . $file);
+        //dd($client);
+
+        return view('admin.clients.show', compact('client'));
     }
 
     /**

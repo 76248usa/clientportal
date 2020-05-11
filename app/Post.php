@@ -10,12 +10,9 @@ class Post extends Model
         'title',
         'body',
         'user_id',
+        'file',
         'photo_name',
         'download',
-        'file'
-
-
-
     ];
 
     public function photo()

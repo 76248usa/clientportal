@@ -53,9 +53,16 @@ Route::post('/files', 'DocumentController@store');
 
 Route::get('/files', 'DocumentController@index');
 
-//Route::get('/files/{id}', 'DocumentController@show');
+Route::get('/files/{id}', 'DocumentController@show');
 
-Route::get('/files/{id}', 'AdminPostsController@show');
-
+//Route::get('/files/{id}', 'AdminPostsController@show');
 
 Route::get('/file/download/{file}', 'DocumentController@download');
+
+Route::get('admin/client/create', 'ClientController@create');
+
+Route::post('admin/client', 'ClientController@store');
+
+Route::get('admin/clients', 'ClientController@index');
+
+Route::get('admin/clients/{id}', 'ClientController@show');
