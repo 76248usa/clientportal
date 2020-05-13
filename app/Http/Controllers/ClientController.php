@@ -18,6 +18,10 @@ class ClientController extends Controller
     {
         $clients = Client::all();
 
+        /*foreach ($client->documents as $document) {
+            echo $document->title . "<br>";
+        }*/
+
         return view('admin.clients.index', compact('clients'));
     }
 
@@ -70,6 +74,11 @@ class ClientController extends Controller
         return view('admin.clients.show', compact('client'));
     }
 
+    public function view($id)
+    {
+        $client = Client::findOrFail($id);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,7 +99,13 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $input = $request->all();
+
+        $client->update($input);
+
+
+        return redirect('/admin/clients');
     }
 
     /**

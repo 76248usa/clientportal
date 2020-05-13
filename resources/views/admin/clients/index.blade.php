@@ -15,19 +15,24 @@
             <th>Title</th>
             <th>Description</th>
             <th>Document</th>
+            <th>Document</th>
+            <th>Document</th>
         </tr>
     </thead>
     <tbody>
         @if($clients)
-        @foreach($clients as $client)
+
+        @foreach ($clients as $client)
         <tr>
             <td>{{$client->id}}</td>
             <td><a href="#">{{$client->name}}</a></td>
             <td>{{$client->title}}</td>
             <td>{{$client->description}}</td>
-            <td>{{$client->document ? $client->document->file : 'Uncategorized'}}</td>
-            <td><a href="/file/download/{{$client->document->file}}">Download</a></td>
 
+            @foreach ($client->documents as $document)
+
+            <td><a href="/file/download/{{$document->file}}">{{$document->file}}</a></td>
+            @endforeach
         </tr>
         @endforeach
         @endif

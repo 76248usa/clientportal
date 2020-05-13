@@ -11,12 +11,20 @@ class Client extends Model
         'name',
         'title',
         'description',
-        'document_id',
+
+
+
+
     ];
 
-    public function document()
+    /*public function document()
     {
 
         return $this->belongsTo('App\Documents');
+    }*/
+
+    public function documents()
+    {
+        return $this->hasMany('App\Documents');
     }
 }

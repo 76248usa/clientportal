@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use League\CommonMark\Block\Element\Document;
 use App\Documents;
 use Response;
+use App\Client;
 
 class DocumentController extends Controller
 {
@@ -17,6 +18,7 @@ class DocumentController extends Controller
     public function index()
     {
         $file = Documents::all();
+
         return view('admin.document.view', compact('file'));
     }
 
@@ -27,7 +29,8 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('admin.document.create');
+        $client = Client::findOrFail(1);
+        return view('admin.document.create', compact('client'));
 
         //return view('admin.posts.create');
     }
@@ -64,6 +67,8 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
+        /*$data = Documents::findOrFail($id);
+        return view('admin.document.details', compact('data'));*/
         $data = Documents::findOrFail($id);
         return view('admin.document.details', compact('data'));
     }

@@ -26,8 +26,15 @@
     {!! Form::select('document_id', [''=>'Choose Documents'] + $documents, null, ['class'=>'form-control'])!!}
 </div>
 
+<div class="form-group">
+    {!! Form::label('document_id2', 'Document:') !!}
+    {!! Form::select('document_id2', [''=>'Choose Documents'] + $documents, null, ['class'=>'form-control'])!!}
+</div>
 
-
+<div class="form-group">
+    {!! Form::label('document_id3', 'Document:') !!}
+    {!! Form::select('document_id3', [''=>'Choose Documents'] + $documents, null, ['class'=>'form-control'])!!}
+</div>
 
 
 <div class="form-group">

@@ -19,6 +19,8 @@ class CreateClientsTable extends Migration
             $table->string('description')->nullable();
             $table->string('name')->nullable();
             $table->string('document_id')->nullable()->index();
+            $table->string('document_id2')->nullable()->index();
+            $table->string('document_id3')->nullable()->index();
             $table->timestamps();
         });
     }
