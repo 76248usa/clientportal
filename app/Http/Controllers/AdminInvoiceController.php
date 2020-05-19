@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use League\CommonMark\Block\Element\Document;
-use App\Documents;
-use Response;
-use App\Client;
+use App\Invoice;
 
-class DocumentController extends Controller
+class AdminInvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $file = Documents::all();
-
-        return view('admin.document.view', compact('file'));
+        return "Werking";
     }
 
     /**
@@ -29,10 +24,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        $client = Client::findOrFail(1);
-        return view('admin.document.create', compact('client'));
-
-        //return view('admin.posts.create');
+        return view('admin.make_invoice.create');
     }
 
     /**
@@ -43,20 +35,11 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Documents();
+        $invoice = Invoice::create($request->all());
 
-        if ($request->file('file')) {
-            $file = $request->file;
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $request->file->move('storage/', $filename);
-            $data->file = $filename;
-        }
-        $data->title = $request->title;
-        $data->description = $request->description;
-        $data->client_id = $request->client_id;
-        $data->save();
-        //dd($data);
-        return redirect()->back();
+        dd($invoice);
+
+        //return redirect('/admin/make_invoices');
     }
 
     /**
@@ -67,15 +50,7 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        /*$data = Documents::findOrFail($id);
-        return view('admin.document.details', compact('data'));*/
-        $data = Documents::findOrFail($id);
-        return view('admin.document.details', compact('data'));
-    }
-
-    public function download($file)
-    {
-        return response()->download('storage/' . $file);
+        //
     }
 
     /**

@@ -44,7 +44,3 @@
             @endforeach
         </div>
     </div>
-    <!--contain
-
-        @endif
-        @endsection

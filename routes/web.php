@@ -59,10 +59,25 @@ Route::get('/files/{id}', 'DocumentController@show');
 
 Route::get('/file/download/{file}', 'DocumentController@download');
 
-Route::get('admin/client/create', 'ClientController@create');
 
-Route::post('admin/client', 'ClientController@store');
+Route::resource('admin/clients', 'ClientController');
 
-Route::get('admin/clients', 'ClientController@index');
+Route::resource('admin/make_invoices', 'AdminInvoiceController');
 
-Route::get('admin/clients/{id}', 'ClientController@show');
+//Route::post('admin/make_invoices', 'AdminInvoiceController@store');
+
+//Route::get('admin/make_invoices/create', 'AdminInvoiceController@create');
+
+//Route::get('admin/client/create', 'ClientController@create');
+
+//Route::post('admin/client', 'ClientController@store');
+
+//Route::get('admin/clients', 'ClientController@index');
+
+//Route::get('admin/clients/{id}', 'ClientController@show');
+
+
+
+//Route::get('admin/clients/{id}/edit', 'ClientController@edit');
+
+//Route::get('admin/clients/{id}/edit/', ['as' => 'clients.edit', 'uses' => 'ClientController@edit']);

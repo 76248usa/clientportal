@@ -65,7 +65,7 @@
                     <h6 class="collapse-header">User Page:</h6>
                     <a class="collapse-item" href="{{route('users.index')}}">All Users</a>
                     <a class="collapse-item" href="{{route('users.create')}}">Create User</a>
-                    <a class="collapse-item" href="#">Edit User</a>
+
                 </div>
             </div>
         </li>
@@ -74,18 +74,38 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Posts</span>
+                <span>Clients</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Posts Page:</h6>
-                    <a class="collapse-item" href="{{route('posts.index')}}">All Posts</a>
-                    <a class="collapse-item" href="{{route('posts.create')}}">Create Posts</a>
-                    <a class="collapse-item" href="#">Edit Posts</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                    <h6 class="collapse-header">Clients Page:</h6>
+                    <a class="collapse-item" href="{{route('clients.index')}}">All Clients</a>
+                    <a class="collapse-item" href="{{route('clients.create')}}">Create Client</a>
+
+
                 </div>
             </div>
         </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Documents</span>
+            </a>
+            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Documents Page:</h6>
+                    <a class="collapse-item" href="/files">All Documents</a>
+
+                    <a class="collapse-item" href="/files/create" data-toggle="tooltip" title="Create client related to document first ">Create Document</a>
+                    </button>
+
+                </div>
+            </div>
+        </li>
+
+
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -114,6 +134,8 @@
                 </div>
             </div>
         </li>
+
+
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
@@ -299,23 +321,14 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class=" img-profile rounded-circle" src="https://img.icons8.com/bubbles/50/000000/name.png" />
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+
+
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -384,6 +397,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
 </body>
 

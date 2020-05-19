@@ -27,7 +27,7 @@ class UsersCreateRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required',
+            //'name' => 'required',
             'email' => 'required',
 
 

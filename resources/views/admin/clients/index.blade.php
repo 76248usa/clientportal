@@ -25,7 +25,7 @@
         @foreach ($clients as $client)
         <tr>
             <td>{{$client->id}}</td>
-            <td><a href="#">{{$client->name}}</a></td>
+            <td><a href="{{route('clients.edit', $client->id)}}">{{$client->name}}</a></td>
             <td>{{$client->title}}</td>
             <td>{{$client->description}}</td>
 
@@ -40,5 +40,11 @@
 
     </tbody>
 </table>
+
+
+
+
+
+
 
 @endsection

@@ -87,7 +87,11 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::findOrfail($id);
+
+        $documents = Documents::pluck('title', 'id')->all();
+
+        return view('admin.clients.edit', compact('client', 'documents'));
     }
 
     /**
@@ -101,11 +105,12 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
         $input = $request->all();
-
         $client->update($input);
-
-
         return redirect('/admin/clients');
+
+        //$client = Client::findOrFail($id);
+        //$new = $request->all();
+        //dd($new);
     }
 
     /**
@@ -116,6 +121,13 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::findOrFail($id);
+
+        //dd($client);
+
+        $client->delete();
+
+
+        return redirect('admin.index');
     }
 }
