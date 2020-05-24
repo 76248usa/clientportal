@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Invoice;
+use PDF;
 
 class AdminInvoiceController extends Controller
 {
@@ -14,7 +15,8 @@ class AdminInvoiceController extends Controller
      */
     public function index()
     {
-        return "Werking";
+        $invoices = Invoice::all();
+        return view('admin.make_invoice.index', compact('invoices'));
     }
 
     /**
@@ -37,9 +39,9 @@ class AdminInvoiceController extends Controller
     {
         $invoice = Invoice::create($request->all());
 
-        dd($invoice);
+        //dd($invoice);
 
-        //return redirect('/admin/make_invoices');
+        return view('/admin/invoice', compact('invoice'));
     }
 
     /**
@@ -50,8 +52,24 @@ class AdminInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        //$invoice = Invoice::findOrFail($id);
+        //dd($invoice);
+        //$pdf = PDF::loadView('admin.invoice', compact('invoice'));
+        //return $pdf->download('invoice.pdf', compact('invoice'));
     }
+
+    public function pdfexport($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        //dd($invoice);
+        $pdf = PDF::loadView('admin.invoice', compact('invoice'))->setPaper('a4', 'portrait');
+        $filename = $invoice->their_company_name;
+        return $pdf->stream($filename . '.pdf');
+
+        //return $pdf->download('invoice.pdf');
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -84,6 +102,11 @@ class AdminInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $invoice = Invoice::findOrFail($id);
+        $invoice->delete($id);
+
+
+        return redirect('/admin/make_invoices');
+
     }
 }

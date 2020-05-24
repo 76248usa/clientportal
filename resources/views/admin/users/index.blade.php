@@ -3,6 +3,8 @@
 
 @section('content')
 
+
+
 <h1>Users</h1>
 
 <h4 class='bg-danger'>{{session('status')}}</h4>
@@ -39,4 +41,6 @@
     </tbody>
 </table>
 
-@endsection
+
+
+@stop

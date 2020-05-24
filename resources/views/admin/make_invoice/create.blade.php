@@ -106,30 +106,15 @@
     {!! Form::text('product_four_quantity', null, ['class' => 'form-control'])!!}
 </div>
 
-<div class="form-group">
-    {!! Form::label('product_one_total', 'First Item total:') !!}
-    {!! Form::text('product_one_total', null, ['class' => 'form-control'])!!}
-</div>
 
-<div class="form-group">
-    {!! Form::label('product_two_total', 'Second Item total:') !!}
-    {!! Form::text('product_two_quantity', null, ['class' => 'form-control'])!!}
-</div>
 
-<div class="form-group">
-    {!! Form::label('product_three_total', 'Third Item total:') !!}
-    {!! Form::text('product_three_quantity', null, ['class' => 'form-control'])!!}
-</div>
 
-<div class="form-group">
-    {!! Form::label('product_four_total', 'Fourth Item total:') !!}
-    {!! Form::text('product_four_total', null, ['class' => 'form-control'])!!}
-</div>
 
-<div class="form-group">
-    {!! Form::label('sub_total', 'Sub-total:') !!}
-    {!! Form::text('sub_total', null, ['class' => 'form-control'])!!}
-</div>
+
+
+
+
+
 
 <div class="form-group">
     {!! Form::label('discount', 'Discount:') !!}
@@ -141,10 +126,7 @@
     {!! Form::text('tax', null, ['class' => 'form-control'])!!}
 </div>
 
-<div class="form-group">
-    {!! Form::label('total', 'Total:') !!}
-    {!! Form::text('total', null, ['class' => 'form-control'])!!}
-</div>
+
 
 
 

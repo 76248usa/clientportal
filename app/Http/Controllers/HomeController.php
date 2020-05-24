@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        //return view('home');
+
+        // Check user role
+        switch (Auth::user()->name) {
+            case 'Sarie':
+                return redirect('/admin/clients/2');
+                //return \Redirect::route('admin/clients', $id)
+                //break;
+            case 'Farrah':
+                return redirect('/admin');
+                break;
+            default:
+                return '/';
+                break;
+        }
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Client Posts</h2>
+    <h2>Client Files</h2>
     <br>
     <table class="table table-striped">
         <thead>
@@ -20,10 +20,22 @@
             @foreach($file as $key=>$data)
             <tr>
                 <td>{{++$key}}</td>
-                <td><a href="{{route('posts.edit', $data->id)}}">{{$data->title}}</a></td>
-                <td>{{$data->body}}</td>
+                <td>{{$data->title}}</td>
+                <td>{{$data->description}}</td>
                 <td><a href="/files/{{$data->id}}">View</a></td>
                 <td><a href="/file/download/{{$data->file}}">Download</a></td>
+
+                <td>{!! Form::open(['method'=>'DELETE', 'action'=> ['DocumentController@destroy', $data->id]]) !!}
+
+
+                    <div class="form-group">
+                        <a data-toggle="tooltip" title="Are you sure? This action will permanently delete the document. ">
+                            {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+                    </div>
+                    </a>
+                    {!! Form::close() !!}
+                </td>
+
 
             </tr>
             @endforeach
@@ -39,31 +51,7 @@
 
 
 
-<div class="container">
-    <h2>Client Posts</h2>
-    <p>Files can be viewed or downloaded</p>
-    <table border="1">
-        <tr>
-            <th>Post Id</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>View</th>
-            <th>Download</th>
-        </tr>
 
-        @foreach($file as $key=>$data)
-        <tr>
-            <td>{{++$key}}</td>
-            <td>{{$data->title}}</td>
-            <td>{{$data->body}}</td>
-            <td><a href="/files/{{$data->id}}">View</a></td>
-            <td><a href="/file/download/{{$data->file}}">Download</a></td>
-        </tr>
-
-        @endforeach
-    </table>
-
-</div>
 
 
 

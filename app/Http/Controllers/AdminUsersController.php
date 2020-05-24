@@ -9,6 +9,9 @@ use App\Http\Controllers;
 use Session;
 use App\User;
 use App\Role;
+use App\Documents;
+use App\Invoice;
+use App\Client;
 
 class AdminUsersController extends Controller
 {
@@ -21,6 +24,8 @@ class AdminUsersController extends Controller
     {
         $users = User::all();
 
+        //$name = Auth::user()->name; 
+    
         return view('admin.users.index', compact('users'));
     }
 
@@ -91,6 +96,15 @@ class AdminUsersController extends Controller
         $user->update($input);
 
         return redirect('/admin/users');
+    }
+
+    public function admin(){
+
+        $clients = Client::all();
+        $documents = Documents::all();
+        $invoices = Invoice::all();
+
+        return view('admin.index', compact('clients', 'documents', 'invoices'));
     }
 
     /**

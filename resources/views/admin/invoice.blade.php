@@ -14,8 +14,10 @@
 
     <div class="container">
         <br><br>
-        <a href="{{ url('/admin/pdf') }}">Download PDF</a>
-        <h2>Invoice Number: </h2>
+        @if($invoice ?? '')
+
+        <a href="{{url('admin/invoice')}}">Download PDF</a>
+        <h2>Invoice Number: {{$invoice['id']}}</h2>
         <p>Thank you for your business</p>
 
         <br><br><br>
@@ -23,7 +25,7 @@
             <div class="card">
                 <div class="card-header">
                     Invoice
-                    <strong>01/01/01/2018</strong>
+                    <strong>{{$invoice['created_at']}}</strong>
                     <span class="float-right"> <strong>Status:</strong> Pending</span>
 
                 </div>
@@ -32,23 +34,26 @@
                         <div class="col-sm-6">
                             <h6 class="mb-3">From:</h6>
                             <div>
-                                <strong>Webz Poland</strong>
+
+                                <strong>{{$invoice['our_company_name']}}</strong>
                             </div>
-                            <div>Madalinskiego 8</div>
-                            <div>71-101 Szczecin, Poland</div>
-                            <div>Email: info@webz.com.pl</div>
-                            <div>Phone: +48 444 666 3333</div>
+                            <div>{{$invoice['our_company_address']}}</div>
+                            <div></div>
+                            <div>Email: {{$invoice['our_email']}}</div>
+                            <div>Phone: {{$invoice['our_phone']}}</div>
+
                         </div>
 
                         <div class="col-sm-6">
                             <h6 class="mb-3">To:</h6>
                             <div>
-                                <strong>Bob Mart</strong>
+                                <strong>{{$invoice['their_company_name']}}</strong>
                             </div>
-                            <div>Attn: Daniel Marek</div>
-                            <div>43-190 Mikolow, Poland</div>
-                            <div>Email: marek@daniel.com</div>
-                            <div>Phone: +48 123 456 789</div>
+                            <div>{{$invoice['their_company_address']}}</div>
+                            <div></div>
+                            <div>Email: {{$invoice['their_email']}}</div>
+                            <div>Phone: {{$invoice['our_phone']}}</div>
+                            <br>
                         </div>
 
 
@@ -60,8 +65,8 @@
                             <thead>
                                 <tr>
                                     <th class="center">#</th>
-                                    <th>Item</th>
-                                    <th>Description</th>
+                                    <th>Item and Description</th>
+                                    <th></th>
 
                                     <th class="right">Unit Cost</th>
                                     <th class="center">Qty</th>
@@ -71,39 +76,54 @@
                             <tbody>
                                 <tr>
                                     <td class="center">1</td>
-                                    <td class="left strong">Origin License</td>
-                                    <td class="left">Extended License</td>
+                                    <td class="left strong">{{$invoice['product_one']}}</td>
+                                    <td class="left"></td>
 
-                                    <td class="right">$999,00</td>
-                                    <td class="center">1</td>
-                                    <td class="right">$999,00</td>
+                                    <td class="right">${{$invoice['product_one_price']}}</td>
+                                    <td class="center">{{$invoice['product_one_quantity']}}</td>
+                                    @if($invoice ?? ''['product_one_price'])
+
+                                    <td class="right">${{$total_one = $invoice['product_one_price'] * $invoice['product_one_quantity']}}</td>
+                                    @endif
+
                                 </tr>
                                 <tr>
                                     <td class="center">2</td>
-                                    <td class="left">Custom Services</td>
-                                    <td class="left">Instalation and Customization (cost per hour)</td>
+                                    <td class="left">{{$invoice['product_two']}}</td>
+                                    <td class="left"></td>
 
-                                    <td class="right">$150,00</td>
-                                    <td class="center">20</td>
-                                    <td class="right">$3.000,00</td>
+                                    <td class="right">${{$invoice['product_two_price']}}</td>
+                                    <td class="center">{{$invoice['product_two_quantity']}}</td>
+                                    @if($invoice ?? ''['product_two_price'])
+
+                                    <td class="right">${{$total_two = $invoice['product_two_price'] * $invoice['product_two_quantity']}}</td>
+                                    @endif
+
                                 </tr>
                                 <tr>
                                     <td class="center">3</td>
-                                    <td class="left">Hosting</td>
-                                    <td class="left">1 year subcription</td>
+                                    <td class="left">{{$invoice['product_three']}}</td>
+                                    <td class="left"></td>
 
-                                    <td class="right">$499,00</td>
-                                    <td class="center">1</td>
-                                    <td class="right">$499,00</td>
+                                    <td class="right">${{$invoice['product_three_price']}}</td>
+                                    <td class="center">{{$invoice['product_three_quantity']}}</td>
+                                    @if($invoice['product_three_price'])
+
+                                    <td class="right">${{$total_three = $invoice['product_three_price'] * $invoice['product_three_quantity']}}</td>
+                                    @endif
+
                                 </tr>
                                 <tr>
                                     <td class="center">4</td>
-                                    <td class="left">Platinum Support</td>
-                                    <td class="left">1 year subcription 24/7</td>
+                                    <td class="left">{{$invoice['product_four']}}</td>
+                                    <td class="left"></td>
 
-                                    <td class="right">$3.999,00</td>
-                                    <td class="center">1</td>
-                                    <td class="right">$3.999,00</td>
+                                    <td class="right">${{$invoice['product_four_price']}}</td>
+                                    <td class="center">{{$invoice['product_four_quantity']}}</td>
+                                    @if($invoice['product_four_price'])
+
+                                    <td class="right">${{$total_four = $invoice['product_four_price'] * $invoice['product_four_quantity']}}</td>
+                                    @endif
                                 </tr>
                             </tbody>
                         </table>
@@ -117,30 +137,51 @@
                             <table class="table table-clear">
                                 <tbody>
                                     <tr>
-                                        <td class="left">
-                                            <strong>Subtotal</strong>
+
+                                        <td class="left"><strong>Subtotal</strong></td>
+                                        @if($invoice['product_four_price'] || $invoice['product_three_price'] || $invoice['product_two_price']|| $invoice['product_one_price'])
+                                        <td class="right">
+                                            <strong>
+
+
+                                                {{$sub_total = $invoice['product_one_price'] * $invoice['product_one_quantity'] + $invoice['product_two_price'] * $invoice['product_two_quantity'] + $invoice['product_three_price'] * $invoice['product_three_quantity'] + $invoice['product_four_price'] * $invoice ['product_four_quantity']}}
+
+
+
+
+
+
+
+
+
+
+
+                                            </strong>
+
                                         </td>
-                                        <td class="right">$8.497,00</td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td class="left">
-                                            <strong>Discount (20%)</strong>
+                                            <strong>Discount</strong>
                                         </td>
-                                        <td class="right">$1,699,40</td>
+                                        <td class="right">${{$invoice['discount']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="left">
-                                            <strong>VAT (10%)</strong>
+                                            <strong>Tax</strong>
                                         </td>
-                                        <td class="right">$679,76</td>
+                                        <td class="right">${{$invoice['tax']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="left">
+                                            @if($sub_total)
                                             <strong>Total</strong>
                                         </td>
                                         <td class="right">
-                                            <strong>$7.477,36</strong>
+                                            <strong>${{$sub_total - $invoice['discount'] - $invoice['tax']}}</strong>
                                         </td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>
@@ -152,6 +193,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
 </body>
 

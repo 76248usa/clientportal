@@ -31,9 +31,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
+//Route::get('/admin', function () {
+//return view('admin.index');
+//});
+
+Route::get('admin', 'AdminUsersController@admin');
 
 Route::resource('admin/users', 'AdminUsersController');
 
@@ -45,7 +47,10 @@ Route::get('/admin/invoice', function () {
     return view('admin.invoice');
 });
 
-Route::get('/admin/pdf', 'CustomerController@fun_pdf');
+//Route::get('/admin/pdf/{id}', 'CustomerController@fun_pdf');
+
+//Route::get('/admin/pdf/{id}', 'AdminInvoiceController@fun_pdf');
+
 
 Route::get('/files/create', 'DocumentController@create');
 
@@ -54,6 +59,9 @@ Route::post('/files', 'DocumentController@store');
 Route::get('/files', 'DocumentController@index');
 
 Route::get('/files/{id}', 'DocumentController@show');
+
+Route::delete('/files/{id}', 'DocumentController@destroy');
+
 
 //Route::get('/files/{id}', 'AdminPostsController@show');
 
@@ -81,3 +89,7 @@ Route::resource('admin/make_invoices', 'AdminInvoiceController');
 //Route::get('admin/clients/{id}/edit', 'ClientController@edit');
 
 //Route::get('admin/clients/{id}/edit/', ['as' => 'clients.edit', 'uses' => 'ClientController@edit']);
+
+//Route::get('/admin/make_invoices/download/{id}', 'AdminInvoiceController@fun_pdf');
+
+Route::get('admin/make_invoices/pdfexport/{id}', 'AdminInvoiceController@pdfexport');
