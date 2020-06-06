@@ -58,13 +58,24 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
     </head>
+
+    <style>
+        body {
+            font-family: 'Roboto';
+            font-size: 22px;
+        }
+    </style>
+
+
 
     <body>
 
         <div class="container">
             <h2>Welcome {{$client->name}}</h2>
-            <p>Please check back regurly to stay updated with important lab results, physician messages and lab results.</p>
+            <p>Please check back regularly to stay updated with important lab results, physician messages and lab results.</p>
             <br><br>
 
             <ul class="nav nav-tabs">
@@ -90,10 +101,11 @@
 
 
                                 <span class="glyphicon glyphicon-paperclip" style="color: #f4511e;
-                              font-size: 30px; padding-top: 25px;"></span>
+                              font-size: 15px; padding-top: 25px;"></span>
                                 <div>
                                     <h4>{{$document->title}}</h4>
                                     <p class="card-text">{{$document->file}}</p>
+
                                     <p><a href="/file/download/{{$document->file}}">Download</a></p>
 
                                     <button type="button" class="btn btn-success"><a href="/files/{{$document->id}}">Full Details</a></button>
@@ -128,9 +140,14 @@
 
 
                                 <span class="glyphicon glyphicon-paperclip" style="color: #f4511e;
-                              font-size: 30px; padding-top: 25px;"></span>
+                              font-size: 15px; padding-top: 25px;"></span>
                                 <div>
                                     <h4>{{$document->title}}</h4>
+
+
+
+
+
                                     <p class="card-text">{{$document->file}}</p>
                                     <p><a href="/file/download/{{$document->file}}">Download</a></p>
 

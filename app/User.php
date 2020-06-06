@@ -22,6 +22,7 @@ class User extends Authenticatable
         'number',
         'password',
         'is_active',
+
     ];
 
     public function post()
@@ -29,6 +30,23 @@ class User extends Authenticatable
 
         return $this->belongsTo('App\Post');
     }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function isAdmin()
+    {
+        if ($this->role->name == "admin") {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 
 
 
@@ -49,10 +67,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function role()
-    {
-
-        return $this->belongsTo('App\Role');
-    }
 }

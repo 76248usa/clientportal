@@ -17,7 +17,7 @@
             <th>Email</th>
             <th>Business</th>
             <th>Phone</th>
-
+            <th>Role</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -30,6 +30,9 @@
             <td>{{$user->email}}</td>
             <td>{{$user->business}}</td>
             <td>{{$user->number}}</td>
+
+            <td>{{$user->role->name}}</td>
+
 
             <td>{{$user->is_active == 1 ? 'Active' : 'No Active'}}</td>
 

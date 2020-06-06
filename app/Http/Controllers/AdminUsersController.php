@@ -23,10 +23,13 @@ class AdminUsersController extends Controller
     public function index()
     {
         $users = User::all();
+        $roles = Role::pluck('name', 'id')->all();
+        //dd($users);
+        //$role = User::find(1)->role;
 
         //$name = Auth::user()->name; 
-    
-        return view('admin.users.index', compact('users'));
+
+        return view('admin.users.index', compact('users', 'roles'));
     }
 
     /**
@@ -34,14 +37,18 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        //$roles = Role::pluck('name', 'id');
+        //
 
-        //dd($roles);
 
-        return view('admin.users.create');
+        $roles = Role::pluck('name', 'id')->all();
+
+
+        return view('admin.users.create', compact('roles'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -52,8 +59,10 @@ class AdminUsersController extends Controller
     public function store(UsersCreateRequest $request)
     {
         User::create($request->all());
+        $roles = Role::pluck('name', 'id')->all();
 
-        return redirect('/admin/users');
+
+        return redirect('/admin/users', compact('roles'));
     }
 
     /**
@@ -76,8 +85,10 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id')->all();
 
-        return view('admin.users.edit', compact('user'));
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -98,7 +109,8 @@ class AdminUsersController extends Controller
         return redirect('/admin/users');
     }
 
-    public function admin(){
+    public function admin()
+    {
 
         $clients = Client::all();
         $documents = Documents::all();
@@ -120,5 +132,14 @@ class AdminUsersController extends Controller
         Session::flash('status', 'Task was successful!');
         //Session::flash('deleted_user', 'The user has been deleted successfully');
         return redirect('/admin/users');
+    }
+
+    public function isAdmin()
+    {
+        if ($this->role->name == 'admin') {
+            return '/admin';
+        }
+        return '/home';
+        //dd($user->role->name);
     }
 }

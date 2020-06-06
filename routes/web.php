@@ -21,7 +21,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/welcome');
+});
+
+Route::get('/home', function () {
 });
 
 Auth::routes();
@@ -30,12 +33,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
+Route::group(['middleware' => 'admin'], function () {
 
-//Route::get('/admin', function () {
-//return view('admin.index');
-//});
 
-Route::get('admin', 'AdminUsersController@admin');
+    Route::get('admin', 'AdminUsersController@admin');
+});
+
+
 
 Route::resource('admin/users', 'AdminUsersController');
 
@@ -93,3 +97,5 @@ Route::resource('admin/make_invoices', 'AdminInvoiceController');
 //Route::get('/admin/make_invoices/download/{id}', 'AdminInvoiceController@fun_pdf');
 
 Route::get('admin/make_invoices/pdfexport/{id}', 'AdminInvoiceController@pdfexport');
+
+//Route::get('admin/afterregister', 'HomeController');

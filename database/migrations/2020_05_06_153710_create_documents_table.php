@@ -18,7 +18,9 @@ class CreateDocumentsTable extends Migration
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->string('file')->nullable();
+            $table->integer('type_id')->index()->unsigned()->nullable();
             $table->integer('client_id')->unsigned()->index();
+
             $table->timestamps();
         });
     }

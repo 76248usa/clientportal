@@ -7,6 +7,7 @@ use League\CommonMark\Block\Element\Document;
 use App\Documents;
 use Response;
 use App\Client;
+use App\Type;
 
 class DocumentController extends Controller
 {
@@ -18,8 +19,8 @@ class DocumentController extends Controller
     public function index()
     {
         $file = Documents::all();
-
-        return view('admin.document.view', compact('file'));
+        $types = Type::pluck('name', 'id')->all();
+        return view('admin.document.view', compact('file', 'types'));
     }
 
     /**
@@ -30,7 +31,8 @@ class DocumentController extends Controller
     public function create()
     {
         $client = Client::findOrFail(1);
-        return view('admin.document.create', compact('client'));
+        $types = Type::pluck('name', 'id')->all();
+        return view('admin.document.create', compact('client', 'types'));
 
         //return view('admin.posts.create');
     }
@@ -53,9 +55,12 @@ class DocumentController extends Controller
         }
         $data->title = $request->title;
         $data->description = $request->description;
+        $data->type_id = $request->type_id;
         $data->client_id = $request->client_id;
         $data->save();
-        //dd($data);
+
+        //dd($data->type);
+
         return redirect()->back();
     }
 

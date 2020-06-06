@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Documents extends Model
 {
-    protected $fillable = ['title', 'description', 'file'];
+    protected $fillable = ['title', 'description', 'file', 'type'];
+
+    public function type()
+    {
+        return $this->belongsTo('App\Type');
+    }
 }

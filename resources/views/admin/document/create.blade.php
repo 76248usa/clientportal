@@ -3,41 +3,48 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
+<h1>Create Document</h1>
 
-<head>
-    <title>Create File</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
+{!! Form::open(['method'=> 'POST', 'action'=>'DocumentController@store', 'files'=>true]) !!}
+{{csrf_field()}}
 
-<body>
-    <br>
-    <div class="container">
-        <h2>Create File Form</h2>
-        <p>Create client first before documents for clients can be created. </p>
-        <form action="/files" method="POST" enctype="multipart/form-data">
-            {{csrf_field()}}
-            <div class="form-group">
+<div class="form-group">
+    {!! Form::label('title', 'Title:') !!}
+    {!! Form::text('title', null, ['class' => 'form-control'])!!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('description', 'Description:') !!}
+    {!! Form::text('description', null, ['class' => 'form-control'])!!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('client_id', 'Client Id:') !!}
+    {!! Form::text('client_id', null, ['class' => 'form-control'])!!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('file', 'File:') !!}
+    {!! Form::file('file', null, ['class'=>'form-control'])!!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('type_id', 'Type:') !!}
+    {!! Form::select('type_id', [''=>'Choose Options'] + $types , null, ['class'=>'form-control'])!!}
+</div>
 
 
-                <input type="text" name="title" placeholder="title">
-                <input type="text" name="description" placeholder="description">
-                <input type="text" name="client_id" placeholder="client id" required>
 
-                <input type="file" name="file">
-            </div>
+<div class="form-group">
+    {!! Form::submit('Create Document', ['class' => 'btn btn-primary']) !!}
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+</div>
 
-</body>
+{!! Form::close() !!}
 
-</html>
+@include('includes.error-message')
+
+
+
+
 @endsection
