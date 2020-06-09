@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
+use App\Post;
 
 class AdminPostsController extends Controller
 {
@@ -13,7 +15,12 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        //
+
+        $posts = Post::all();
+        //$posts = Post::with('client')->get();
+
+        //dd($posts);
+        return view('admin/posts/index', compact('posts'));
     }
 
     /**
@@ -23,7 +30,11 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::pluck('name', 'id')->all();
+
+        //dd($clients);
+
+        return view('admin/posts/create', compact('clients'));
     }
 
     /**
@@ -34,9 +45,15 @@ class AdminPostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
+
+        $posts = Post::create($request->all());
+
+        //dd($posts);
+
+
+        //return redirect('admin/posts/index', compact('posts'));
+    }
     /**
      * Display the specified resource.
      *
@@ -79,6 +96,9 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        //dd($post);
+        $post->delete();
+        return redirect('admin/posts');
     }
 }

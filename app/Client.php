@@ -11,10 +11,6 @@ class Client extends Model
         'name',
         'title',
         'description',
-
-
-
-
     ];
 
     /*public function document()
@@ -26,5 +22,10 @@ class Client extends Model
     public function documents()
     {
         return $this->hasMany('App\Documents');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
     }
 }

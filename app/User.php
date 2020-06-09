@@ -25,11 +25,7 @@ class User extends Authenticatable
 
     ];
 
-    public function post()
-    {
 
-        return $this->belongsTo('App\Post');
-    }
 
     public function role()
     {

@@ -39,11 +39,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin', 'AdminUsersController@admin');
 });
 
-
-
 Route::resource('admin/users', 'AdminUsersController');
-
-Route::resource('admin/posts', 'AdminPostsController');
 
 Route::get('/download/{id}', 'AdminPostsController@downfunc');
 
@@ -71,6 +67,7 @@ Route::delete('/files/{id}', 'DocumentController@destroy');
 
 Route::get('/file/download/{file}', 'DocumentController@download');
 
+Route::resource('admin/posts', 'AdminPostsController');
 
 Route::resource('admin/clients', 'ClientController');
 

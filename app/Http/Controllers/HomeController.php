@@ -37,11 +37,25 @@ class HomeController extends Controller
         $invoices = Invoice::all();
         $documents = Documents::all();
 
+        foreach ($documents as $document) {
+            if ($document->type->name == 'invoice') {
+                $invoice = $document->type->name;
+            }
+            if ($document->type->name == 'receipt') {
+                $receipt = $document->type->name;
+            }
+            if ($document->type->name == 'message') {
+                $message = $document->type->name;
+            }
+            if ($document->type->name == 'lab') {
+                $lab = $document->type->name;
+            }
+        }
+
         if (Auth::user()->name == 'Elzie I Crous') {
 
             return view('admin.index');
         }
-
 
         foreach ($clients as $client) {
             $clientname = $client->name;
@@ -50,10 +64,6 @@ class HomeController extends Controller
                 return view('admin.clients.show', compact('client'));
             }
         }
-
-
-
-
 
 
 
@@ -66,8 +76,6 @@ class HomeController extends Controller
 
 
         //dd($clientname);
-
-
 
         return view('home');
     }

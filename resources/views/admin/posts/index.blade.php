@@ -1,64 +1,65 @@
-@extends('app.blade')
+@extends('layouts.admin')
 
 @section('content')
-​
-<title>Create Document</title>
-
-<div class="container">
-    <h2>Striped Rows</h2>
-    <p>The .table-striped class adds zebra-stripes to a table:</p>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>sl</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>View</th>
-                <th>Download</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach($file as $key=>$data)
-            <tr>
-                <td>{{++$key}}</td>
-                <td></td>{{$data->title}}td>
-                <td>{{$data->description}}</td>
-                <td><a href="/files/{{$data->id}}">View</a></td>
-                <td><a href="/file/download/{{$data->file}}">Download</a></td>
-
-            </tr>
-            @endforeach
 
 
-        </tbody>
-    </table>
-</div>
+<h1>Messages</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+
+            <th>Patient Id</th>
+
+            <th>Title</th>
+            <th>Message</th>
+
+            <th>Created at</th>
+            <th>Update</th>
+    </thead>
+    <tbody>
+
+        @if($posts ?? '')
+
+
+        @foreach($posts ?? '' as $post)
+
+        <tr>
+            <td>{{$post->id}}</td>
+            <td>{{$post['client_id']}}</td>
 
 
 
 
-<table border="1">
-    <tr>
-        <th>s1</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>View</th>
-        <th>Download</th>
 
-    </tr>
 
-    @foreach($file as $key=>$data)
-    <tr>
-        <td>{{++$key}}</td>
-        <td>{{$data->title}}</td>
-        <td>{{$data->description}}</td>
-        <td><a href="/files/{{$data->id}}">View</a></td>
-        <td><a href="/file/download/{{$data->file}}">Download</a></td>
+            <td>{{$post->title}}</td>
+            <td>{{$post->body}}</td>
 
-    </tr>
+            <td>{{$post->created_at->diffForhumans()}}</td>
+            <td>{{$post->updated_at->diffForhumans()}}</td>
 
-    @endforeach
+            <td>{!! Form::open(['method'=>'DELETE', 'action'=> ['AdminPostsController@destroy', $post->id]]) !!}
+
+
+                <div class="form-group">
+                    <a data-toggle="tooltip" title="Are you sure? This action will permanently delete the document. ">
+                        {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
+                </div>
+                </a>
+                {!! Form::close() !!}
+            </td>
+
+
+        </tr>
+
+        @endforeach
+
+        @endif
+
+    </tbody>
 </table>
 
 @endsection

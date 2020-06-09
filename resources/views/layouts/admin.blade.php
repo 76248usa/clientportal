@@ -129,6 +129,23 @@
         </div>
       </li>
 
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-fw fa-wrench"></i>
+          <span>Messages</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Message Page:</h6>
+            <a class="collapse-item" href="{{route('posts.index')}}">All Messages</a>
+            <a class="collapse-item" href="{{route('posts.create')}}">Create Message</a>
+
+          </div>
+        </div>
+      </li>
+
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
