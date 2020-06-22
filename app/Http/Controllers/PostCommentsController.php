@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Invoice;
-use PDF;
+use App\Comment;
+use Illuminate\Support\Facades\Auth;
 
-class AdminInvoiceController extends Controller
+class PostCommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AdminInvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
-        return view('admin.make_invoice.index', compact('invoices'));
+        $comments = Comment::all();
+        return view('admin.comments.index', compact('comments'));
     }
 
     /**
@@ -26,7 +26,7 @@ class AdminInvoiceController extends Controller
      */
     public function create()
     {
-        return view('admin.make_invoice.create');
+        //
     }
 
     /**
@@ -37,11 +37,22 @@ class AdminInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = Invoice::create($request->all());
 
-        //dd($invoice);
+        //return $request->all();
+        $user = Auth::user();
+        $data = [
+            'post_id' => $request->post_id,
+            'client_id' => $user->id,
+            'body' => $request->body
 
-        return view('/admin/invoice', compact('invoice'));
+
+        ];
+
+        $comment = Comment::create($data);
+
+        $request->session()->flash('comment_message', 'Your comment has been submitted successfully');
+
+        return redirect()->back();
     }
 
     /**
@@ -52,24 +63,8 @@ class AdminInvoiceController extends Controller
      */
     public function show($id)
     {
-        //$invoice = Invoice::findOrFail($id);
-        //dd($invoice);
-        //$pdf = PDF::loadView('admin.invoice', compact('invoice'));
-        //return $pdf->download('invoice.pdf', compact('invoice'));
+        //
     }
-
-    public function pdfexport($id)
-    {
-        $invoice = Invoice::findOrFail($id);
-        //dd($invoice);
-        $pdf = PDF::loadView('admin.invoice', compact('invoice'))->setPaper('a4', 'portrait');
-        $filename = $invoice->their_company_name;
-        return $pdf->stream($filename . '.pdf');
-
-        //return $pdf->download('invoice.pdf');
-    }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -102,10 +97,6 @@ class AdminInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        $invoice = Invoice::findOrFail($id);
-        $invoice->delete($id);
-
-
-        return redirect('/admin/make_invoices');
+        //
     }
 }

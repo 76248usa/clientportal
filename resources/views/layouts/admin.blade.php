@@ -60,7 +60,7 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fa fa-fw fa-cog"></i>
+          <i class="fa fa-user-o"></i>
           <span>Users</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -74,11 +74,11 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-fw fa-wrench"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClients" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-female"></i><i class="fa fa-male"></i>
           <span>Clients</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseClients" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Clients Page:</h6>
             <a class="collapse-item" href="{{route('clients.index')}}">All Clients</a>
@@ -98,11 +98,11 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fa fa-fw fa-folder"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocs" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fa fa-file-text-o"></i>
           <span>Documents</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseDocs" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Documents/Files Page</h6>
             <a class="collapse-item" href="/files/">All Files</a>
@@ -115,11 +115,11 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fa fa-fw fa-folder"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInv" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fa fa-file-pdf-o"></i>
           <span>PDF Invoices</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseInv" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Invoices Page</h6>
             <a class="collapse-item" href="{{route('make_invoices.index')}}">All PDF Invoices</a>
@@ -132,33 +132,39 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fa fa-fw fa-wrench"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMes" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-commenting-o"></i>
           <span>Messages</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseMes" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Message Page:</h6>
             <a class="collapse-item" href="{{route('posts.index')}}">All Messages</a>
             <a class="collapse-item" href="{{route('posts.create')}}">Create Message</a>
+            <a class="collapse-item" href="{{route('comments.index')}}">All Comments</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRec" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fa fa-file-pdf-o"></i>
+          <span>Receipts</span>
+        </a>
+        <div id="collapseRec" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Receipts Page:</h6>
+            <a class="collapse-item" href="{{route('posts.index')}}">All Receipts</a>
+            <a class="collapse-item" href="{{route('posts.create')}}">Create Receipt</a>
 
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fa fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fa fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
+
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

@@ -12,6 +12,7 @@ use App\User;
 use App\Role;
 use App\Invoice;
 use App\Documents;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -52,14 +53,22 @@ class HomeController extends Controller
             }
         }
 
-        if (Auth::user()->name == 'Elzie I Crous') {
+        /*$posts = DB::table('posts')
+            ->where('status', '=', 1)
+            ->where('client_id', '=', Auth::user()->id)
+
+            ->count();
+
+        echo $posts;*/
+
+        if (Auth::user()->role_id == 1) {
 
             return view('admin.index');
         }
 
         foreach ($clients as $client) {
-            $clientname = $client->name;
-            $name = Auth::user()->name;
+            $clientname = $client->email;
+            $name = Auth::user()->email;
             if ($clientname == $name) {
                 return view('admin.clients.show', compact('client'));
             }
@@ -67,16 +76,6 @@ class HomeController extends Controller
 
 
 
-        /*if ($name == 'Elzie I Crous') {
-            $clients = Client::all();
-            $invoices = Invoice::all();
-            $documents = Documents::all();
-            return view('admin.index');
-        }*/
-
-
-        //dd($clientname);
-
-        return view('home');
+        return view('/welcome');
     }
 }

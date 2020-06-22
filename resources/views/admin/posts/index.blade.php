@@ -10,14 +10,16 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Physician</th>
 
-            <th>Patient Id</th>
+            <th>Patient Name</th>
 
             <th>Title</th>
             <th>Message</th>
 
             <th>Created at</th>
-            <th>Update</th>
+
+            <th>Patient Comments</th>
     </thead>
     <tbody>
 
@@ -28,18 +30,29 @@
 
         <tr>
             <td>{{$post->id}}</td>
-            <td>{{$post['client_id']}}</td>
 
+            <td>{{Auth::user()->name}}</td>
 
-
-
+            <td>{{$post->client->name}}</td>
 
 
             <td>{{$post->title}}</td>
-            <td>{{$post->body}}</td>
+            <!--<td>{{$post->body}}</td>-->
+
+            <td><a href="#" data-toggle="tooltip" title="{{ $post->body }} "> {{\Illuminate\Support\Str::limit($post->body, $limit = 10, $end = '...') }}</a></td>
+
 
             <td>{{$post->created_at->diffForhumans()}}</td>
-            <td>{{$post->updated_at->diffForhumans()}}</td>
+
+
+            @foreach($post->comments as $comment)
+
+            <td><a href="#" data-toggle="tooltip" title="{{ $comment->body }} "> {{\Illuminate\Support\Str::limit($comment->body, $limit = 10, $end = '...') }}</a></td>
+
+
+            @endforeach
+
+
 
             <td>{!! Form::open(['method'=>'DELETE', 'action'=> ['AdminPostsController@destroy', $post->id]]) !!}
 
@@ -53,11 +66,13 @@
             </td>
 
 
-        </tr>
 
-        @endforeach
 
-        @endif
+
+
+            @endforeach
+
+            @endif
 
     </tbody>
 </table>

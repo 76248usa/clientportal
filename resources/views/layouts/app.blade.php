@@ -20,10 +20,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/sheet.css') }}" rel="stylesheet">
+    <style>
+
+
+
+    </style>
+
+
 </head>
 
 <body class="mainclass">
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container ">
@@ -63,6 +70,7 @@
                                 {{ Auth::user()->name }} <span class=""></span>
                             </a>
 
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -75,8 +83,26 @@
 
                             </div>
                         </li>
+
+                        <li>
+                            <a href="{{url('/admin/posts')}}">Messages</a>
+                            <?php echo $posts ?? ''; ?>
+
+                        </li>
+
+
+
+
+
+
+
+
+
+
+
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -85,6 +111,7 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 
 </html>

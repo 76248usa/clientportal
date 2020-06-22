@@ -2,5 +2,33 @@
     background-color: #d3d3d3;
 }
 .firstclass {
-    background-color: #f9f9f9;
+    background-color: #f0f0f0;
+}
+.secondclass {
+    background-color: #f0f0f0;
+}
+
+html,
+body {
+    background-color: #fff;
+    background-image: url("pille.jpg");
+    color: #ffffff;
+    font-family: "Nunito", sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.thirdclass {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
 }

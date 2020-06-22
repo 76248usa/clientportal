@@ -12,4 +12,9 @@ class Documents extends Model
     {
         return $this->belongsTo('App\Type');
     }
+
+    public function client()
+    {
+        return $this->belongsTo('\App\Client');
+    }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Invoice;
+use App\Receipt;
+//use Illuminate\Http\Request;
+use Request;
 use PDF;
 
-class AdminInvoiceController extends Controller
+class AdminReceiptController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class AdminInvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
-        return view('admin.make_invoice.index', compact('invoices'));
+        $receipts = Receipt::all();
+        return view('admin.receipt.index', compact('receipts'));
     }
 
     /**
@@ -26,7 +27,7 @@ class AdminInvoiceController extends Controller
      */
     public function create()
     {
-        return view('admin.make_invoice.create');
+        return view('admin.receipt.create');
     }
 
     /**
@@ -37,11 +38,9 @@ class AdminInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = Invoice::create($request->all());
-
-        //dd($invoice);
-
-        return view('/admin/invoice', compact('invoice'));
+        $input = Receipt::create($request::all());
+        //dd($input);
+        return redirect('/admin/receipts');
     }
 
     /**
@@ -52,24 +51,8 @@ class AdminInvoiceController extends Controller
      */
     public function show($id)
     {
-        //$invoice = Invoice::findOrFail($id);
-        //dd($invoice);
-        //$pdf = PDF::loadView('admin.invoice', compact('invoice'));
-        //return $pdf->download('invoice.pdf', compact('invoice'));
+        //
     }
-
-    public function pdfexport($id)
-    {
-        $invoice = Invoice::findOrFail($id);
-        //dd($invoice);
-        $pdf = PDF::loadView('admin.invoice', compact('invoice'))->setPaper('a4', 'portrait');
-        $filename = $invoice->their_company_name;
-        return $pdf->stream($filename . '.pdf');
-
-        //return $pdf->download('invoice.pdf');
-    }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -102,10 +85,17 @@ class AdminInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        $invoice = Invoice::findOrFail($id);
-        $invoice->delete($id);
+        //
+    }
 
+    public function pdfexport($id)
+    {
+        $receipt = Receipt::findOrFail($id);
+        //dd($invoice);
+        $pdf = PDF::loadView('admin.receipts', compact('receipt'))->setPaper('a4', 'portrait');
+        $filename = $receipt->their_company_name;
+        return $pdf->stream($filename . '.pdf');
 
-        return redirect('/admin/make_invoices');
+        //return $pdf->download('invoice.pdf');
     }
 }

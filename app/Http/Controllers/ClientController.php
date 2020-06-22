@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Documents;
+use Illuminate\Support\Facades\DB;
+use Post;
 
 
 class ClientController extends Controller
@@ -21,6 +23,8 @@ class ClientController extends Controller
         /*foreach ($client->documents as $document) {
             echo $document->title . "<br>";
         }*/
+
+        //dd($clients);
 
         return view('admin.clients.index', compact('clients'));
     }
@@ -46,14 +50,21 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
         Client::create($request->all());
 
-        //$data = new Client();
-        //$data->name = $request->name;
-        //$data->title = $request->title;
-        //$data->description = $request->description;
-        //$data->document_id = $request->document_id;
+        $data = new Client();
+        $data->name = $request->name;
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->document_id = $request->document_id;
         //$data->save();
+
+        //dd($data->document_id);
 
 
         return redirect('/admin/clients');
@@ -69,7 +80,7 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
 
-        //dd($client);
+
 
         return view('admin.clients.show', compact('client'));
     }
@@ -128,6 +139,6 @@ class ClientController extends Controller
         $client->delete();
 
 
-        return redirect('admin.index');
+        return redirect('admin/clients');
     }
 }

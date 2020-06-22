@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use Illuminate\Http\Request;
 use App\Post;
+use Auth;
 
 class AdminPostsController extends Controller
 {
@@ -15,11 +16,14 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-
         $posts = Post::all();
-        //$posts = Post::with('client')->get();
 
-        //dd($posts);
+
+        foreach ($posts as $post) {
+            $name = $post->client->name;
+        }
+
+        //dd($name);
         return view('admin/posts/index', compact('posts'));
     }
 
@@ -30,9 +34,10 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
+
         $clients = Client::pluck('name', 'id')->all();
 
-        //dd($clients);
+        //dd($client);
 
         return view('admin/posts/create', compact('clients'));
     }
@@ -47,12 +52,12 @@ class AdminPostsController extends Controller
     {
 
 
-        $posts = Post::create($request->all());
+        $post = Post::create($request->all());
 
-        //dd($posts);
+        //dd($post);
 
 
-        //return redirect('admin/posts/index', compact('posts'));
+        return redirect('admin/posts');
     }
     /**
      * Display the specified resource.

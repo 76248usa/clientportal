@@ -30,11 +30,9 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        $client = Client::findOrFail(1);
         $types = Type::pluck('name', 'id')->all();
-        return view('admin.document.create', compact('client', 'types'));
 
-        //return view('admin.posts.create');
+        return view('admin.document.create', compact('types'));
     }
 
     /**
