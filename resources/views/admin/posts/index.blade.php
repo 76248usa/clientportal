@@ -31,7 +31,7 @@
         <tr>
             <td>{{$post->id}}</td>
 
-            <td>{{Auth::user()->name}}</td>
+            <td>{{$post->author}}</td>
 
             <td>{{$post->client->name}}</td>
 

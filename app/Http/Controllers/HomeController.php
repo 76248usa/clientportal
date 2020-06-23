@@ -12,7 +12,7 @@ use App\User;
 use App\Role;
 use App\Invoice;
 use App\Documents;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class HomeController extends Controller
 {
@@ -60,6 +60,14 @@ class HomeController extends Controller
             ->count();
 
         echo $posts;*/
+
+        $post_count = $posts = DB::table('posts')
+            ->where('status', '=', 1)
+            ->where('client_id', '=', Auth::user()->id)
+
+            ->count();
+
+        //echo $post_count;
 
         if (Auth::user()->role_id == 1) {
 

@@ -24,10 +24,6 @@ class AdminUsersController extends Controller
     {
         $users = User::all();
         $roles = Role::pluck('name', 'id')->all();
-        //dd($users);
-        //$role = User::find(1)->role;
-
-        //$name = Auth::user()->name; 
 
         return view('admin.users.index', compact('users', 'roles'));
     }
@@ -60,8 +56,6 @@ class AdminUsersController extends Controller
     {
         User::create($request->all());
         $roles = Role::pluck('name', 'id')->all();
-
-
         return redirect('/admin/users', compact('roles'));
     }
 
@@ -102,9 +96,7 @@ class AdminUsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $input = $request->all();
-
-        $user->update($input);
+        $user->update($request->all());
 
         return redirect('/admin/users');
     }

@@ -26,6 +26,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -93,19 +94,16 @@
                     <li><a data-toggle="tab" href="#menu2">Lab Results</a></li>
                     <li><a data-toggle="tab" href="#menu3">Messages</a>
 
-                        <span class="badge badge-warning">
+                        <span class="w3-badge w3-green">
                             <?php
-                            $posts = DB::table('posts')
-                                ->where('status', '=', 1)
-                                ->where('client_id', '=', Auth::user()->id)
 
-                                ->count();
+                            echo $client->posts->count();
 
-                            echo $posts;
 
                             ?>
                         </span>
                     </li>
+
                 </ul>
 
 
@@ -217,7 +215,9 @@ font-size: 15px;
                             <h4> {{$post->title}}
 
                             </h4>
-                            <h5>{{$post->body}}</h5>
+                            <p>{{$post->body}}</p>
+                            <p>Physician: {{$post->author}}</p>
+
 
 
                             <div class=" card-text">

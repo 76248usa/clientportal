@@ -32,6 +32,12 @@
     {!! Form::text('number', null, ['class' => 'form-control'])!!}
 </div>
 
+<div class="form-group">
+    {!! Form::label('role_id', 'Role:') !!}
+    {!! Form::select('role_id', $roles , null, ['class'=>'form-control'])!!}
+</div>
+
+
 <div class="row">
     <div class="col-sm-6">
 

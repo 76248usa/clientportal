@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Auth;
 
+
 class AdminPostsController extends Controller
 {
     /**
@@ -19,9 +20,7 @@ class AdminPostsController extends Controller
         $posts = Post::all();
 
 
-        foreach ($posts as $post) {
-            $name = $post->client->name;
-        }
+
 
         //dd($name);
         return view('admin/posts/index', compact('posts'));
@@ -34,12 +33,11 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-
+        $author = Auth::user()->name;
         $clients = Client::pluck('name', 'id')->all();
+        //dd($author);
 
-        //dd($client);
-
-        return view('admin/posts/create', compact('clients'));
+        return view('admin/posts/create', compact('clients', 'author'));
     }
 
     /**
@@ -50,11 +48,15 @@ class AdminPostsController extends Controller
      */
     public function store(Request $request)
     {
+        $author = Auth::user()->name;
+        $input = $request->all();
 
+        $input['author'] = $author;
+        $input['status'] = 1;
 
-        $post = Post::create($request->all());
+        $post = Post::create($input);
 
-        //dd($post);
+        //($post);
 
 
         return redirect('admin/posts');

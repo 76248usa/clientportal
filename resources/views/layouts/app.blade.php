@@ -84,11 +84,6 @@
                             </div>
                         </li>
 
-                        <li>
-                            <a href="{{url('/admin/posts')}}">Messages</a>
-                            <?php echo $posts ?? ''; ?>
-
-                        </li>
 
 
 

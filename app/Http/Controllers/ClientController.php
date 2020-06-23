@@ -82,6 +82,7 @@ class ClientController extends Controller
 
 
 
+
         return view('admin.clients.show', compact('client'));
     }
 
